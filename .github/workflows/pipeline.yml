@@ -93,9 +93,11 @@ jobs:
       - name: E2E tests
         uses: cypress-io/github-action@v6
         with:
-          command: npm run test:e2e
           start: npm run start-test
-          wait-on: http://localhost:5000
+          wait-on: 'http://localhost:5000'
+          wait-on-timeout: 120
+        env:
+          NODE_OPTIONS: --openssl-legacy-provider
 
   deploy:
     needs: [test, e2e]
